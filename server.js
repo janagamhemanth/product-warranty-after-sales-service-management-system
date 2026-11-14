@@ -578,17 +578,29 @@ async function seedAdmin() {
   await User.create({ name, email, passwordHash: await bcrypt.hash(password, 12), role: "admin" });
   console.log(`Admin account created: ${email}`);
 }
-
 async function start() {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/warranty_management");
+    const mongoURI = process.env.MONGODB_URI;
+
+    if (!mongoURI) {
+      throw new Error("MONGODB_URI is missing from environment variables");
+    }
+
+    console.log("MongoDB URI loaded:", Boolean(mongoURI));
+
+    await mongoose.connect(mongoURI);
+
     console.log("Connected to MongoDB.");
+
     await seedAdmin();
-    app.listen(PORT, () => console.log(`Warranty Management System running at http://localhost:${PORT}`));
+
+    app.listen(PORT, () => {
+      console.log(`Warranty Management System running on port ${PORT}`);
+    });
+
   } catch (error) {
-    console.error("Could not start server. Check your MongoDB connection and .env settings.", error.message);
+    console.error("Could not start server:", error.message);
     process.exit(1);
   }
 }
-
 start();

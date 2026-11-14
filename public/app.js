@@ -40,15 +40,29 @@ function showApp() {
   $("authScreen").classList.add("hidden");
   $("appScreen").classList.remove("hidden");
   $("logoutBtn").classList.remove("hidden");
+
+  const isAdmin = state.user?.role === "admin";
+
   $("userLabel").textContent = state.user?.name || "";
-  $("navLinks").classList.toggle("hidden", state.user?.role === "admin");
-  $("adminSummary").classList.toggle("hidden", state.user?.role !== "admin");
-  $("customerSummary").classList.toggle("hidden", state.user?.role === "admin");
-  $("adminPanel").classList.toggle("hidden", state.user?.role !== "admin");
- if ($("addProductTop")) {
-  $("addProductTop").classList.toggle("hidden", state.user?.role === "admin");
-}
-  $("productsHeading").textContent = state.user?.role === "admin" ? "All registered products" : "Registered products";
+
+  // Show navigation for both admin and customer
+  $("navLinks").classList.remove("hidden");
+
+  // Show correct summary
+  $("adminSummary").classList.toggle("hidden", !isAdmin);
+  $("customerSummary").classList.toggle("hidden", isAdmin);
+
+  $("adminPanel").classList.toggle("hidden", !isAdmin);
+
+  if ($("addProductTop")) {
+    $("addProductTop").classList.toggle("hidden", isAdmin);
+  }
+
+  $("productsHeading").textContent =
+    isAdmin ? "All registered products" : "Registered products";
+
+  // Set the correct starting page
+  updateView(isAdmin ? "customers" : "overview");
 }
 function logout(notify = true) {
   state.token = ""; state.user = null; state.products = []; state.requests = [];
@@ -329,19 +343,95 @@ $("adminRequests").innerHTML = filteredRequests.length
     );
   if (isAdmin) $("overviewContent").classList.add("hidden");
   updateView(state.view);
-}
-function updateView(view) {
-  state.view = view;
+}function updateView(view) {
+
   const isAdmin = state.user?.role === "admin";
-  if (isAdmin) view = "overview";
-  $("overviewContent").classList.toggle("hidden", view !== "overview" || isAdmin);
-  $("productsView").classList.toggle("hidden", view !== "products");
-  $("requestsView").classList.toggle("hidden", view !== "requests");
-  const titles = { overview: ["Overview", "Everything you need to keep your products covered."], products: [isAdmin ? "All products" : "My products", "Warranty dates and product details."], requests: ["Service requests", "Track the progress of your service tickets."] };
+
+  state.view = view;
+
+  if (isAdmin) {
+
+    // Hide customer dashboard and summary
+    $("overviewContent").classList.add("hidden");
+    $("customerSummary").classList.add("hidden");
+    $("adminSummary").classList.add("hidden");
+
+    // Show admin panel
+    $("adminPanel").classList.remove("hidden");
+
+    // Hide all admin sections first
+    $("adminCustomers").classList.add("hidden");
+    $("adminProductsSection").classList.add("hidden");
+    $("adminRequestsSection").classList.add("hidden");
+
+    // Hide customer product and request pages first
+    $("productsView").classList.add("hidden");
+    $("requestsView").classList.add("hidden");
+    if (view === "overview") {
+  $("adminSummary").classList.remove("hidden");
+  $("adminRequestsSection").classList.remove("hidden");
+}
+else if (view === "customers") {
+  $("adminCustomers").classList.remove("hidden");
+}
+else if (view === "products") {
+  $("productsView").classList.remove("hidden");
+  $("adminProductsSection").classList.remove("hidden");
+}
+else if (view === "requests") {
+  $("adminRequestsSection").classList.remove("hidden");
+}
+
+    // Show selected admin page
+    if (view === "customers") {
+      $("adminCustomers").classList.remove("hidden");
+    }
+
+    else if (view === "products") {
+      $("productsView").classList.remove("hidden");
+      $("adminProductsSection").classList.remove("hidden");
+    }
+
+    else if (view === "requests") {
+      $("adminRequestsSection").classList.remove("hidden");
+    }
+
+  } else {
+
+    // Customer navigation
+    $("adminPanel").classList.add("hidden");
+    $("adminSummary").classList.add("hidden");
+    $("customerSummary").classList.remove("hidden");
+
+    $("overviewContent").classList.toggle("hidden", view !== "overview");
+    $("productsView").classList.toggle("hidden", view !== "products");
+    $("requestsView").classList.toggle("hidden", view !== "requests");
+
+  }
+
+  const titles = {
+    overview: ["Overview", "Dashboard overview."],
+    products: [
+      isAdmin ? "All Products" : "My Products",
+      "Warranty dates and product details."
+    ],
+    requests: [
+      "Service Requests",
+      "Review and manage service requests."
+    ],
+    customers: [
+      "Registered Customers",
+      "View customer details and assigned products."
+    ]
+  };
+
   $("pageTitle").textContent = titles[view][0];
   $("pageDescription").textContent = titles[view][1];
-  document.querySelectorAll("[data-view]").forEach(a => a.classList.toggle("active", a.dataset.view === view));
-  if (isAdmin) $("adminPanel").classList.remove("hidden");
+
+  document.querySelectorAll("[data-view]").forEach(a => {
+    a.classList.toggle("active", a.dataset.view === view);
+  });
+
 }
 function openModal(id) {
   if (id === "requestModal") {

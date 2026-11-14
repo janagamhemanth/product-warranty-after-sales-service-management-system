@@ -4,262 +4,751 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Register products, check warranty coverage, and track after-sales service requests.">
+
   <title>Warrantiq | Product Warranty Management</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
+
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- HEADER -->
   <header class="topbar">
-    <a class="brand" href="#" id="brandLink"><span class="brand-mark">W</span><span>Warrantiq<span class="brand-dot">.</span><small>WARRANTY & SERVICE PORTAL</small></span></a>
+
+    <a class="brand" href="#" id="brandLink">
+      <span class="brand-mark">W</span>
+      <span>
+        Warrantiq<span class="brand-dot">.</span>
+        <small>WARRANTY & SERVICE PORTAL</small>
+      </span>
+    </a>
+
+    <!-- NAVIGATION -->
     <nav id="navLinks" class="nav-links">
-      <a href="#overview" data-view="overview" class="nav-link active">Overview</a>
-      <a href="#products" data-view="products" class="nav-link">My Products</a>
-      <a href="#requests" data-view="requests" class="nav-link">Service Requests</a>
+
+      <a href="#overview" data-view="overview" class="nav-link active">
+        Overview
+      </a>
+
+      <a href="#products" data-view="products" class="nav-link">
+        My Products
+      </a>
+
+      <a href="#requests" data-view="requests" class="nav-link">
+        Service Requests
+      </a>
+
+      <a href="#customers" data-view="customers" class="nav-link admin-only">
+        Customers
+      </a>
+
     </nav>
+
     <div class="account-area">
       <span id="userLabel" class="user-label"></span>
       <button id="logoutBtn" class="btn btn-quiet hidden">Log out</button>
     </div>
+
   </header>
 
+
   <main>
+
+    <!-- LOGIN AND REGISTRATION -->
     <section id="authScreen" class="auth-layout">
+
       <div class="auth-copy">
-        <div class="eyebrow"><span class="eyebrow-dot"></span> ONE PLACE. COMPLETE PEACE OF MIND.</div>
+
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          ONE PLACE. COMPLETE PEACE OF MIND.
+        </div>
+
         <h1>Your products.<br><span>Your protection.</span></h1>
-        <p>Keep your purchases organized, know when warranties expire, and get support without the paperwork.</p>
+
+        <p>
+          Keep your purchases organized, know when warranties expire,
+          and get support without the paperwork.
+        </p>
+
         <div class="auth-benefits">
-          <div><span class="benefit-icon">✓</span><span><b>Warranty at a glance</b><small>Know what's covered and when it expires.</small></span></div>
-          <div><span class="benefit-icon">↗</span><span><b>Service without stress</b><small>Submit a request and follow every update.</small></span></div>
-          <div><span class="benefit-icon">⌂</span><span><b>One organized place</b><small>Your registered products in one dashboard.</small></span></div>
+
+          <div>
+            <span class="benefit-icon">✓</span>
+            <span>
+              <b>Warranty at a glance</b>
+              <small>Know what's covered and when it expires.</small>
+            </span>
+          </div>
+
+          <div>
+            <span class="benefit-icon">↗</span>
+            <span>
+              <b>Service without stress</b>
+              <small>Submit a request and follow every update.</small>
+            </span>
+          </div>
+
+          <div>
+            <span class="benefit-icon">⌂</span>
+            <span>
+              <b>One organized place</b>
+              <small>Your registered products in one dashboard.</small>
+            </span>
+          </div>
+
         </div>
+
       </div>
+
+
       <div class="auth-card">
-        <div class="auth-tabs"><button class="auth-tab selected" data-auth="login">Sign in</button><button class="auth-tab" data-auth="register">Create account</button></div>
-        <h2 id="authTitle">Welcome back</h2><p id="authSubtitle" class="muted">Sign in to manage your registered products.</p>
+
+        <div class="auth-tabs">
+          <button class="auth-tab selected" data-auth="login">Sign in</button>
+          <button class="auth-tab" data-auth="register">Create account</button>
+        </div>
+
+        <h2 id="authTitle">Welcome back</h2>
+
+        <p id="authSubtitle" class="muted">
+          Sign in to manage your registered products.
+        </p>
+
         <form id="authForm">
-          <div id="nameField" class="field hidden"><label for="authName">Full name</label><input id="authName" name="name" autocomplete="name" maxlength="80" placeholder="Your full name"></div>
-          <div class="field"><label for="authEmail">Email address</label><input id="authEmail" name="email" type="email" required autocomplete="email" placeholder="you@example.com"></div>
-          <div class="field"><label for="authPassword">Password</label><input id="authPassword" name="password" type="password" required minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></div>
-          <button id="authSubmit" class="btn btn-primary btn-full" type="submit">Sign in <span>→</span></button>
-          <p id="authHint" class="form-hint">Demo admin credentials are configured in your .env file.</p>
+
+          <div id="nameField" class="field hidden">
+            <label for="authName">Full name</label>
+            <input
+              id="authName"
+              name="name"
+              autocomplete="name"
+              maxlength="80"
+              placeholder="Your full name"
+            >
+          </div>
+
+          <div class="field">
+            <label for="authEmail">Email address</label>
+            <input
+              id="authEmail"
+              name="email"
+              type="email"
+              required
+              autocomplete="email"
+              placeholder="you@example.com"
+            >
+          </div>
+
+          <div class="field">
+            <label for="authPassword">Password</label>
+            <input
+              id="authPassword"
+              name="password"
+              type="password"
+              required
+              minlength="8"
+              autocomplete="current-password"
+              placeholder="At least 8 characters"
+            >
+          </div>
+
+          <button id="authSubmit" class="btn btn-primary btn-full" type="submit">
+            Sign in <span>→</span>
+          </button>
+
+          <p id="authHint" class="form-hint">
+            Demo admin credentials are configured in your environment variables.
+          </p>
+
         </form>
+
       </div>
+
     </section>
 
+
+
+    <!-- APPLICATION DASHBOARD -->
     <section id="appScreen" class="app-screen hidden">
+
+      <!-- PAGE HEADING -->
       <div class="page-heading">
-        <div><div class="eyebrow">YOUR PERSONAL WARRANTY HUB</div><h1 id="pageTitle">Overview</h1><p id="pageDescription" class="muted">Everything you need to keep your products covered.</p></div>
-       
+
+        <div>
+          <div class="eyebrow">YOUR PERSONAL WARRANTY HUB</div>
+          <h1 id="pageTitle">Overview</h1>
+          <p id="pageDescription" class="muted">
+            Everything you need to keep your products covered.
+          </p>
+        </div>
+
       </div>
 
+
+      <!-- ADMIN SUMMARY -->
       <div id="adminSummary" class="stats-grid hidden">
-        <article class="stat-card"><span class="stat-icon purple">♙</span><span class="stat-label">Customers</span><strong id="statCustomers">0</strong><small>Registered accounts</small></article>
-        <article class="stat-card"><span class="stat-icon blue">▣</span><span class="stat-label">Products</span><strong id="statProducts">0</strong><small>In the system</small></article>
-        <article class="stat-card"><span class="stat-icon orange">◷</span><span class="stat-label">Open requests</span><strong id="statOpen">0</strong><small>Awaiting resolution</small></article>
-        <article class="stat-card"><span class="stat-icon green">✓</span><span class="stat-label">Resolved</span><strong id="statResolved">0</strong><small>Requests completed</small></article>
+
+        <article class="stat-card">
+          <span class="stat-icon purple">♙</span>
+          <span class="stat-label">Customers</span>
+          <strong id="statCustomers">0</strong>
+          <small>Registered accounts</small>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon blue">▣</span>
+          <span class="stat-label">Products</span>
+          <strong id="statProducts">0</strong>
+          <small>In the system</small>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon orange">◷</span>
+          <span class="stat-label">Open requests</span>
+          <strong id="statOpen">0</strong>
+          <small>Awaiting resolution</small>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon green">✓</span>
+          <span class="stat-label">Resolved</span>
+          <strong id="statResolved">0</strong>
+          <small>Requests completed</small>
+        </article>
+
       </div>
 
+
+
+      <!-- CUSTOMER SUMMARY -->
       <div id="customerSummary" class="stats-grid">
-        <article class="stat-card"><span class="stat-icon purple">▣</span><span class="stat-label">Registered products</span><strong id="myProductCount">0</strong><small>Products you have added</small></article>
-        <article class="stat-card"><span class="stat-icon green">✓</span><span class="stat-label">Active warranties</span><strong id="activeCount">0</strong><small>Currently within warranty</small></article>
-        <article class="stat-card"><span class="stat-icon orange">◷</span><span class="stat-label">Expired warranties</span><strong id="expiredCount">0</strong><small>Outside warranty period</small></article>
-        <article class="stat-card"><span class="stat-icon blue">↗</span><span class="stat-label">Service requests</span><strong id="myRequestCount">0</strong><small>Requests submitted</small></article>
+
+        <article class="stat-card">
+          <span class="stat-icon purple">▣</span>
+          <span class="stat-label">Registered products</span>
+          <strong id="myProductCount">0</strong>
+          <small>Products you have added</small>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon green">✓</span>
+          <span class="stat-label">Active warranties</span>
+          <strong id="activeCount">0</strong>
+          <small>Currently within warranty</small>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon orange">◷</span>
+          <span class="stat-label">Expired warranties</span>
+          <strong id="expiredCount">0</strong>
+          <small>Outside warranty period</small>
+        </article>
+
+        <article class="stat-card">
+          <span class="stat-icon blue">↗</span>
+          <span class="stat-label">Service requests</span>
+          <strong id="myRequestCount">0</strong>
+          <small>Requests submitted</small>
+        </article>
+
       </div>
+
+
+
+      <!-- ADMIN PANEL -->
       <section id="adminPanel" class="panel hidden">
-        <section class="card" id="adminCustomers">
-  <div class="section-heading">
-    <div>
-      <h2>Registered Customers</h2>
-      <p class="muted">View customer details and assigned products.</p>
-    </div>
-    <button type="button" id="customersRefresh" class="btn btn-outline">
-      ↻ Refresh Customers
-    </button>
-  </div>
 
-  <div class="customer-search">
-  <input
-    type="search"
-    id="customerSearch"
-    placeholder="Search by customer name or email..."
-    aria-label="Search customers by name or email"
-  />
-</div>
-  <p id="customersMessage" role="status"></p>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Registered On</th>
-          <th>Products</th>
-        </tr>
-      </thead>
-      <tbody id="adminCustomersList">
-        <tr>
-          <td colspan="4">Loading customers...</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-        <div class="section-heading"><div><h2>All service requests</h2><p class="muted">Review customer issues and update their status.</p></div><button id="adminRefresh" class="btn btn-outline">↻ Refresh</button></div>
-        <div class="request-filters">
-  <label for="adminRequestStatus">Filter requests by status:</label>
-  <select id="adminRequestStatus">
-    <option value="All">All Requests</option>
-    <option value="Submitted">Submitted</option>
-    <option value="In Progress">In Progress</option>
-    <option value="Resolved">Resolved</option>
-  </select>
-</div>
-        <div id="adminRequests" class="request-list"></div>
-        <section id="adminAddProduct" class="card">
-  <h2>Assign Product to Customer</h2>
-  <p>Enter the customer's email and product details.</p>
+        <!-- ADMIN CUSTOMERS PAGE -->
+        <section id="adminCustomers" class="card">
 
-  <form id="adminProductForm">
-    <label for="customerEmail">Customer Email</label>
-    <input
-      type="email"
-      id="customerEmail"
-      name="customerEmail"
-      placeholder="customer@example.com"
-      required
-    />
+          <div class="section-heading">
 
-    <label for="productName">Product Name</label>
-    <input
-      type="text"
-      id="productName"
-      name="productName"
-      placeholder="Laptop"
-      maxlength="100"
-      required
-    />
+            <div>
+              <h2>Registered Customers</h2>
+              <p class="muted">
+                View customer details and assigned products.
+              </p>
+            </div>
 
-    <label for="brand">Brand</label>
-    <input
-      type="text"
-      id="brand"
-      name="brand"
-      placeholder="Dell"
-      maxlength="80"
-      required
-    />
+            <button type="button" id="customersRefresh" class="btn btn-outline">
+              ↻ Refresh Customers
+            </button>
 
-    <label for="serialNumber">Serial Number</label>
-    <input
-      type="text"
-      id="serialNumber"
-      name="serialNumber"
-      placeholder="DELL-1001"
-      maxlength="100"
-      required
-    />
+          </div>
 
-    <label for="purchaseDate">Purchase Date</label>
-    <input
-      type="date"
-      id="purchaseDate"
-      name="purchaseDate"
-      required
-    />
+          <div class="customer-search">
+            <input
+              type="search"
+              id="customerSearch"
+              placeholder="Search by customer name or email..."
+              aria-label="Search customers by name or email"
+            >
+          </div>
 
-    <label for="warrantyMonths">Warranty (Months)</label>
-    <input
-      type="number"
-      id="warrantyMonths"
-      name="warrantyMonths"
-      min="0"
-      max="120"
-      step="1"
-      value="12"
-      required
-    />
+          <p id="customersMessage" role="status"></p>
 
-    <label for="productNotes">Notes (Optional)</label>
-    <textarea
-      id="productNotes"
-      name="notes"
-      maxlength="500"
-      placeholder="Additional product details"
-    ></textarea>
+          <div class="table-wrap">
 
-    <button type="submit">Assign Product</button>
-    <p id="adminProductMessage" role="status"></p>
-  </form>
-</section>
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Registered On</th>
+                  <th>Products</th>
+                </tr>
+              </thead>
+
+              <tbody id="adminCustomersList">
+                <tr>
+                  <td colspan="4">Loading customers...</td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+
+
+        <!-- ADMIN PRODUCTS PAGE -->
+        <section id="adminProductsSection" class="card hidden">
+
+          <h2>Assign Product to Customer</h2>
+
+          <p>Enter the customer's email and product details.</p>
+
+          <form id="adminProductForm">
+
+            <label for="customerEmail">Customer Email</label>
+            <input
+              type="email"
+              id="customerEmail"
+              name="customerEmail"
+              placeholder="customer@example.com"
+              required
+            >
+
+            <label for="productName">Product Name</label>
+            <input
+              type="text"
+              id="productName"
+              name="productName"
+              placeholder="Laptop"
+              maxlength="100"
+              required
+            >
+
+            <label for="brand">Brand</label>
+            <input
+              type="text"
+              id="brand"
+              name="brand"
+              placeholder="Dell"
+              maxlength="80"
+              required
+            >
+
+            <label for="serialNumber">Serial Number</label>
+            <input
+              type="text"
+              id="serialNumber"
+              name="serialNumber"
+              placeholder="DELL-1001"
+              maxlength="100"
+              required
+            >
+
+            <label for="purchaseDate">Purchase Date</label>
+            <input
+              type="date"
+              id="purchaseDate"
+              name="purchaseDate"
+              required
+            >
+
+            <label for="warrantyMonths">Warranty (Months)</label>
+            <input
+              type="number"
+              id="warrantyMonths"
+              name="warrantyMonths"
+              min="0"
+              max="120"
+              step="1"
+              value="12"
+              required
+            >
+
+            <label for="productNotes">Notes (Optional)</label>
+            <textarea
+              id="productNotes"
+              name="notes"
+              maxlength="500"
+              placeholder="Additional product details"
+            ></textarea>
+
+            <button type="submit">Assign Product</button>
+
+            <p id="adminProductMessage" role="status"></p>
+
+          </form>
+
+        </section>
+
+
+
+        <!-- ADMIN SERVICE REQUESTS PAGE -->
+        <section id="adminRequestsSection" class="card hidden">
+
+          <div class="section-heading">
+
+            <div>
+              <h2>All service requests</h2>
+              <p class="muted">
+                Review customer issues and update their status.
+              </p>
+            </div>
+
+            <button id="adminRefresh" class="btn btn-outline">
+              ↻ Refresh
+            </button>
+
+          </div>
+
+          <div class="request-filters">
+
+            <label for="adminRequestStatus">
+              Filter requests by status:
+            </label>
+
+            <select id="adminRequestStatus">
+              <option value="All">All Requests</option>
+              <option value="Submitted">Submitted</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Resolved">Resolved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+
+          </div>
+
+          <div id="adminRequests" class="request-list"></div>
+
+        </section>
+
       </section>
 
+
+
+      <!-- CUSTOMER OVERVIEW -->
       <section id="overviewContent" class="content-grid">
+
         <div class="panel main-panel">
-          <div class="section-heading"><div><h2>My products</h2><p class="muted">A quick look at your registered purchases.</p></div><button class="text-button" data-go="products">View all →</button></div>
+
+          <div class="section-heading">
+
+            <div>
+              <h2>My products</h2>
+              <p class="muted">
+                A quick look at your registered purchases.
+              </p>
+            </div>
+
+            <button class="text-button" data-go="products">
+              View all →
+            </button>
+
+          </div>
+
           <div id="overviewProducts" class="product-list"></div>
+
         </div>
+
+
         <div class="panel side-panel">
-          <div class="section-heading"><div><h2>Quick actions</h2><p class="muted">What would you like to do?</p></div></div>
-  
-          <button class="quick-action" id="quickRequest"><span class="quick-icon blue">↗</span><span><b>Request service</b><small>Tell us about a product issue</small></span><span class="arrow">→</span></button>
-          <div class="help-card"><div class="help-symbol">✦</div><b>Stay warranty-ready</b><p>Keep your serial number and purchase date handy when registering a product.</p></div>
+
+          <div class="section-heading">
+            <div>
+              <h2>Quick actions</h2>
+              <p class="muted">What would you like to do?</p>
+            </div>
+          </div>
+
+          <button class="quick-action" id="quickRequest">
+            <span class="quick-icon blue">↗</span>
+            <span>
+              <b>Request service</b>
+              <small>Tell us about a product issue</small>
+            </span>
+            <span class="arrow">→</span>
+          </button>
+
+          <div class="help-card">
+            <div class="help-symbol">✦</div>
+            <b>Stay warranty-ready</b>
+            <p>
+              Keep your serial number and purchase date handy
+              when registering a product.
+            </p>
+          </div>
+
         </div>
+
       </section>
 
+
+
+      <!-- PRODUCTS PAGE -->
       <section id="productsView" class="panel hidden">
-        <div class="section-heading"><div><h2 id="productsHeading">Registered products</h2><p class="muted">Warranty dates and product details.</p></div><button id="addProductBtn" class="btn btn-primary">＋ Add product</button></div>
+
+        <div class="section-heading">
+
+          <div>
+            <h2 id="productsHeading">Registered products</h2>
+            <p class="muted">
+              Warranty dates and product details.
+            </p>
+          </div>
+
+          <button id="addProductBtn" class="btn btn-primary">
+            ＋ Add product
+          </button>
+
+        </div>
+
         <div class="product-search">
-  <input
-    type="search"
-    id="productSearch"
-    placeholder="Search by product name, brand, or serial number..."
-    aria-label="Search products"
-  />
-</div>
+          <input
+            type="search"
+            id="productSearch"
+            placeholder="Search by product name, brand, or serial number..."
+            aria-label="Search products"
+          >
+        </div>
+
         <div id="allProducts" class="product-grid"></div>
+
       </section>
 
+
+
+      <!-- CUSTOMER SERVICE REQUESTS PAGE -->
       <section id="requestsView" class="panel hidden">
-        <div class="section-heading"><div><h2>Service request history</h2><p class="muted">Track the progress of your service tickets.</p></div><button id="newRequestBtn" class="btn btn-primary">＋ New request</button></div>
+
+        <div class="section-heading">
+
+          <div>
+            <h2>Service request history</h2>
+            <p class="muted">
+              Track the progress of your service tickets.
+            </p>
+          </div>
+
+          <button id="newRequestBtn" class="btn btn-primary">
+            ＋ New request
+          </button>
+
+        </div>
+
         <div id="myRequests" class="request-list"></div>
+
       </section>
+
     </section>
+
   </main>
 
-  <div id="productModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+
+
+  <!-- PRODUCT REGISTRATION MODAL -->
+  <div
+    id="productModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="productModalTitle"
+  >
+
     <div class="modal-backdrop" data-close="productModal"></div>
-    <div class="modal-card"><button class="modal-close" data-close="productModal" aria-label="Close">×</button><div class="eyebrow">PRODUCT REGISTRATION</div><h2 id="productModalTitle">Register a product</h2><p class="muted">Enter the details from your purchase receipt.</p>
+
+    <div class="modal-card">
+
+      <button class="modal-close" data-close="productModal" aria-label="Close">
+        ×
+      </button>
+
+      <div class="eyebrow">PRODUCT REGISTRATION</div>
+
+      <h2 id="productModalTitle">Register a product</h2>
+
+      <p class="muted">
+        Enter the details from your purchase receipt.
+      </p>
+
       <form id="productForm">
+
         <div class="form-grid">
-          <div class="field"><label for="productName">Product name *</label><input id="productName" required maxlength="100" placeholder="e.g. Laptop"></div>
-          <div class="field"><label for="brand">Brand *</label><input id="brand" required maxlength="80" placeholder="e.g. Lenovo"></div>
-          <div class="field"><label for="serialNumber">Serial number *</label><input id="serialNumber" required maxlength="100" placeholder="Product serial number"></div>
-          <div class="field"><label for="purchaseDate">Purchase date *</label><input id="purchaseDate" type="date" required></div>
-          <div class="field"><label for="warrantyMonths">Warranty period *</label><select id="warrantyMonths" required><option value="3">3 months</option><option value="6">6 months</option><option value="12" selected>1 year</option><option value="18">18 months</option><option value="24">2 years</option><option value="36">3 years</option><option value="60">5 years</option><option value="0">No warranty</option></select></div>
-          <div class="field full-field"><label for="productNotes">Notes (optional)</label><textarea id="productNotes" maxlength="500" rows="2" placeholder="Optional details"></textarea></div>
+
+          <div class="field">
+            <label for="productName">Product name *</label>
+            <input id="productName" required maxlength="100" placeholder="e.g. Laptop">
+          </div>
+
+          <div class="field">
+            <label for="brand">Brand *</label>
+            <input id="brand" required maxlength="80" placeholder="e.g. Lenovo">
+          </div>
+
+          <div class="field">
+            <label for="serialNumber">Serial number *</label>
+            <input id="serialNumber" required maxlength="100" placeholder="Product serial number">
+          </div>
+
+          <div class="field">
+            <label for="purchaseDate">Purchase date *</label>
+            <input id="purchaseDate" type="date" required>
+          </div>
+
+          <div class="field">
+            <label for="warrantyMonths">Warranty period *</label>
+            <select id="warrantyMonths" required>
+              <option value="3">3 months</option>
+              <option value="6">6 months</option>
+              <option value="12" selected>1 year</option>
+              <option value="18">18 months</option>
+              <option value="24">2 years</option>
+              <option value="36">3 years</option>
+              <option value="60">5 years</option>
+              <option value="0">No warranty</option>
+            </select>
+          </div>
+
+          <div class="field full-field">
+            <label for="productNotes">Notes (optional)</label>
+            <textarea
+              id="productNotes"
+              maxlength="500"
+              rows="2"
+              placeholder="Optional details"
+            ></textarea>
+          </div>
+
         </div>
-        <div class="modal-actions"><button type="button" class="btn btn-outline" data-close="productModal">Cancel</button><button type="submit" class="btn btn-primary">Save product</button></div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" data-close="productModal">
+            Cancel
+          </button>
+
+          <button type="submit" class="btn btn-primary">
+            Save product
+          </button>
+        </div>
+
       </form>
+
     </div>
+
   </div>
 
-  <div id="requestModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="requestModalTitle">
+
+
+  <!-- SERVICE REQUEST MODAL -->
+  <div
+    id="requestModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="requestModalTitle"
+  >
+
     <div class="modal-backdrop" data-close="requestModal"></div>
-    <div class="modal-card"><button class="modal-close" data-close="requestModal" aria-label="Close">×</button><div class="eyebrow">AFTER-SALES SUPPORT</div><h2 id="requestModalTitle">Request a service</h2><p class="muted">Tell us what happened and we will track it as a service ticket.</p>
+
+    <div class="modal-card">
+
+      <button class="modal-close" data-close="requestModal" aria-label="Close">
+        ×
+      </button>
+
+      <div class="eyebrow">AFTER-SALES SUPPORT</div>
+
+      <h2 id="requestModalTitle">Request a service</h2>
+
+      <p class="muted">
+        Tell us what happened and we will track it as a service ticket.
+      </p>
+
       <form id="requestForm">
-        <div class="field"><label for="requestProduct">Select product *</label><select id="requestProduct" required></select></div>
-        <div class="field"><label for="issue">Describe the issue *</label><textarea id="issue" required maxlength="1500" rows="4" placeholder="Explain the problem with your product..."></textarea></div>
-        <div class="field"><label for="preferredContact">Preferred contact (optional)</label><input id="preferredContact" maxlength="100" placeholder="Phone number or email"></div>
-        <div class="modal-actions"><button type="button" class="btn btn-outline" data-close="requestModal">Cancel</button><button type="submit" class="btn btn-primary">Submit request</button></div>
+
+        <div class="field">
+          <label for="requestProduct">Select product *</label>
+          <select id="requestProduct" required></select>
+        </div>
+
+        <div class="field">
+          <label for="issue">Describe the issue *</label>
+          <textarea
+            id="issue"
+            required
+            maxlength="1500"
+            rows="4"
+            placeholder="Explain the problem with your product..."
+          ></textarea>
+        </div>
+
+        <div class="field">
+          <label for="preferredContact">Preferred contact (optional)</label>
+          <input
+            id="preferredContact"
+            maxlength="100"
+            placeholder="Phone number or email"
+          >
+        </div>
+
+        <div class="modal-actions">
+
+          <button type="button" class="btn btn-outline" data-close="requestModal">
+            Cancel
+          </button>
+
+          <button type="submit" class="btn btn-primary">
+            Submit request
+          </button>
+
+        </div>
+
       </form>
+
     </div>
+
   </div>
 
-  <footer><span>Warrantiq<span class="brand-dot">.</span> <small>Product Warranty & After-Sales Service Management System</small></span><span>BCA Academic Project · <span id="year"></span></span></footer>
+
+
+  <!-- FOOTER -->
+  <footer>
+
+    <span>
+      Warrantiq<span class="brand-dot">.</span>
+      <small>Product Warranty & After-Sales Service Management System</small>
+    </span>
+
+    <span>
+      BCA Academic Project · <span id="year"></span>
+    </span>
+
+  </footer>
+
+
   <script src="/app.js" defer></script>
+
 </body>
 </html>

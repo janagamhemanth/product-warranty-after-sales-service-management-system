@@ -67,6 +67,7 @@ function showApp() {
 function logout(notify = true) {
   state.token = ""; state.user = null; state.products = []; state.requests = [];
   localStorage.removeItem("warrantiq_token");
+  $("navLinks").classList.add("hidden");
   $("authScreen").classList.remove("hidden"); $("appScreen").classList.add("hidden");
   $("logoutBtn").classList.add("hidden"); $("userLabel").textContent = "";
   if (notify) showToast("You have been logged out.");
